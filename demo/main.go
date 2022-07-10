@@ -17,5 +17,12 @@ func main() {
 
 	byZero := fp.Div(0.0)
 	g := fp.Compose(byZero, f)
-	fmt.Println(g(10.0))
+	fmt.Println(g(10.0)) // divide by zero
+
+	out := func(x float64) (float64, error) {
+		fmt.Println(x)
+		return x, nil
+	}
+	h := fp.Compose(increment, out, twice, out, decrement, out, half, out)
+	fmt.Println(h(10.0)) // same as f, byt with logging
 }
