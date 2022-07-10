@@ -12,7 +12,8 @@ func Compose[T any](fs ...ErrFunc[T]) ErrFunc[T] {
 	return func(x T) (T, error) {
 		var y T
 		var err error
-		for _, f := range fs {
+		for i := len(fs) - 1; i >= 0; i-- {
+			f := fs[i]
 			y, err = f(x)
 			if err != nil {
 				return *new(T), err

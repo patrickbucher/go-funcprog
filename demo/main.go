@@ -26,7 +26,14 @@ func main() {
 	h := fp.Compose(increment, out, twice, out, decrement, out, half, out)
 	fmt.Println(h(10.0)) // same as f, byt with logging
 
-	numbers := fp.List[float64]{1.0, 2.0, 3.0}
+	numbers := fp.ListFunctor[float64]{1.0, 2.0, 3.0}
+
+	// First Functor Law: Identity Function
+	fmt.Println(numbers.Map(func(x float64) (float64, error) { return x, nil }))
+
+	// Second Functor Law: f as a composition of other functions
 	fmt.Println(numbers.Map(increment).Map(twice).Map(decrement).Map(half))
 	fmt.Println(numbers.Map(f))
+
+	fp.Demo()
 }

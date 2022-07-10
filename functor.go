@@ -1,13 +1,9 @@
 package funcprog
 
-type Functor[T any] interface {
-	Map(ErrFunc[T]) Functor[T]
-}
+type ListFunctor[T any] []T
 
-type List[T any] []T
-
-func (l List[T]) Map(f ErrFunc[T]) Functor[T] {
-	var ys List[T]
+func (l ListFunctor[T]) Map(f ErrFunc[T]) ListFunctor[T] {
+	var ys ListFunctor[T]
 	for _, x := range l {
 		y, _ := f(x)
 		ys = append(ys, y)
